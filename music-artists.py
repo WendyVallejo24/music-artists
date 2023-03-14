@@ -65,7 +65,7 @@ df_selection=data.query("country_mb == @country_mb")
 st.write("Nacionalidad seleccionada",df_selection)
 
 # ------------ histograma -------------
-st.header('Histograma')
+st.subheader('Histograma')
 data = data['country_mb']
 fig_country = px.bar(data,
                      x = data,
@@ -92,6 +92,7 @@ fig_barra=px.bar(data,
 st.plotly_chart(fig_barra)
 
 # --------- grafica scatter -----------
+st.subheader('Gráfica Scatter')
 country=data['country_mb']
 artist=data['artist_mb']
 listeners=data['listeners_lastfm']
