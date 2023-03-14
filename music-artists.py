@@ -6,6 +6,7 @@ st.title("Music Artists Popularity")
 st.sidebar.image('logo.jpg')
 st.sidebar.write('Author: Wendy Belén Vallejo Patraca')
 st.sidebar.write('S20006733')
+st.sidebar.markdown("___")
 
 sidebar = st.sidebar
 DATA_URL = 'artists.csv'
@@ -38,6 +39,7 @@ if(btnbuscar):
     st.write(f"Total artists: {count_row}")
 
     st.dataframe(filterbyname)
+st.sidebar.markdown("___")
 
 # --------------- select -----------------
 @st.cache
@@ -56,6 +58,7 @@ if(btnartist):
     st.write(f"Total items: {count_row}")
 
     st.dataframe(filterbyartist)
+st.sidebar.markdown("___")
 
 # ------------ multiselect --------------------
 country_mb = st.sidebar.multiselect("Selecciona Nacionalidades",
