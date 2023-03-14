@@ -5,6 +5,7 @@ import plotly.express as px
 st.title("Music Artists Popularity")
 st.sidebar.image('logo.jpg')
 st.sidebar.write('Author: Wendy Belén Vallejo Patraca')
+st.sidebar.write('S20006733')
 
 sidebar = st.sidebar
 DATA_URL = 'artists.csv'
@@ -89,3 +90,16 @@ fig_barra=px.bar(data,
                 color_discrete_sequence=["#7ECBB4"],
                 template="plotly_white")
 st.plotly_chart(fig_barra)
+
+# --------- grafica scatter -----------
+country=data['country_mb']
+artist=data['artist_mb']
+listeners=data['listeners_lastfm']
+fig_age=px.scatter(data,
+                   x=country,
+                   y=listeners,
+                   color=artist,
+                   title="¿De qué país es el artistas y qué tan escuchado es?",
+                   labels=dict(country_mb="Country", artist_mb="Artist", listeners_lastfm="Listeners"),
+                   template="plotly_white")
+st.plotly_chart(fig_age)
