@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 st.title("Music Artists Popularity")
 st.sidebar.image('logo.jpg')
 st.sidebar.write('Author: Wendy Belén Vallejo Patraca')
 st.sidebar.write('S20006733')
-st.sidebar.markdown("___")
 
 sidebar = st.sidebar
 DATA_URL = 'artists.csv'
@@ -21,7 +21,11 @@ data_load_state = st.text('Cargando...')
 data = load_data(500)
 data_load_state.text('Done! (using st.cache)')
 
-st.dataframe(data)
+if st.sidebar.checkbox("Mostrar dataset "):
+  st.subheader('Raw Data')
+  st.write(data)
+st.sidebar.markdown("___")
+#st.dataframe(data)
 
 # --------------- buscar artista ----------------
 @st.cache
@@ -32,6 +36,7 @@ def load_data_byname(name):
 
 name = sidebar.text_input("Nombre del Artista")
 btnbuscar = sidebar.button('Buscar Artista')
+st.subheader("Artista buscado")
 
 if(btnbuscar):
     filterbyname = load_data_byname(name)
@@ -65,6 +70,7 @@ country_mb = st.sidebar.multiselect("Selecciona Nacionalidades",
                                 options=data['country_mb'].unique())
 
 df_selection=data.query("country_mb == @country_mb")
+st.subheader('Seleccionar país')
 st.write("Nacionalidad seleccionada",df_selection)
 
 # ------------ histograma -------------
@@ -74,11 +80,12 @@ fig_country = px.bar(data,
                      x = data,
                      y = data.index,
                      orientation = 'v',
-                     title = 'Cantidad por paises',
-                     labels=dict(x="Country", index = 'Cantidad'),
+                     title = 'Número de artistas por país',
+                     labels=dict(x="Country", index=''),
                      color_discrete_sequence=['#7ECBB4'],
                      template = 'plotly_white')
 st.plotly_chart(fig_country)
+
 
 # -------------- grafica de barras -----------------
 st.subheader('Gráfica de barras')
